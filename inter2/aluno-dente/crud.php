@@ -77,7 +77,7 @@
 <body>
 <?php
 ##permite acesso as variaves dentro do aquivo conexao
-require_once('../conexao2.php');
+require_once('../conexao.php');
 
 
 
@@ -90,7 +90,7 @@ if (isset($_GET['cadastrar'])) {
             $dt = $_GET['dt'];
 
             // Consultar o banco de dados para verificar se já existe o mesmo horário e dia cadastrados
-            $sqlVerificaHorario = "SELECT COUNT(*) as total FROM horarioss WHERE horario = :horario";
+            $sqlVerificaHorario = "SELECT COUNT(*) as total FROM horarios WHERE horario = :horario";
             $stmtVerificaHorario = $conexao->prepare($sqlVerificaHorario);
             $stmtVerificaHorario->bindParam(':horario', $horario, PDO::PARAM_STR);
             $stmtVerificaHorario->execute();
@@ -100,7 +100,7 @@ if (isset($_GET['cadastrar'])) {
                 echo "<p><strong>Erro:</strong> Já existe um horário cadastrado com o mesmo horário e dia.</p>";
             } else {
                 // Inserir os dados na tabela horarioss
-                $sqlInserir = "INSERT INTO horarioss (horario, dt) VALUES (:horario, :dt)";
+                $sqlInserir = "INSERT INTO horarios (horario, dt) VALUES (:horario, :dt)";
                 $stmtInserir = $conexao->prepare($sqlInserir);
                 $stmtInserir->bindParam(':horario', $horario, PDO::PARAM_STR);
                 $stmtInserir->bindParam(':dt', $dt, PDO::PARAM_STR);
@@ -126,7 +126,7 @@ if (isset($_GET['update'])) {
     $aluno = $_GET["aluno"];
 
     ##codigo sql
-    $sql = "UPDATE  horarioss SET horario= :horario, dt= :dt, tipo= :tipo, aluno= :aluno WHERE id= :id ";
+    $sql = "UPDATE  horarios SET horario= :horario, dt= :dt, tipo= :tipo, aluno= :aluno WHERE id= :id ";
 
     ##junta o código sql à conexão do banco
     $stmt = $conexao->prepare($sql);

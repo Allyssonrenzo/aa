@@ -2,7 +2,7 @@
 //Criar as constantes com as credencias de acesso ao banco de dados
 DEFINE('HOST', 'localhost');
 DEFINE('USUARIO', 'root');
-DEFINE('SENHA', 'Italo1@.');
+DEFINE('SENHA', '1234');
 DEFINE('DBNAME', 'psicologo');
 
 //Criar a conexão com banco de dados usando o PDO e a porta do banco de dados

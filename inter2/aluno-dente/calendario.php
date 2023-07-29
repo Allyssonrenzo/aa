@@ -137,7 +137,7 @@
 </head>
 <body>
     <header>
-        <h1>Calendário de Horários Para o Psicologo</h1>
+        <h1>Calendário de Horários Para o Dentista</h1>
     </header>
     <div class="container">
          <?php
@@ -213,7 +213,7 @@
          );
          ?>
  
-         <h1>Calendário de Horarios Para o Pisicologo</h1>
+         <h1>Calendário de Horarios Para o Dentista</h1>
          <div class="calendario">
              <div class="mes">
                  <a href="<?php echo $linkMesAnterior; ?>"><<</a>

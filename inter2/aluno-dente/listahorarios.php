@@ -71,13 +71,13 @@
     <div class="container">
    
         <?php
-        require_once('../conexao2.php');
+        require_once('../conexao.php');
         $aluno = 'aluno';
         
         $dataCompleta = $_GET['dia']; // Recebe o valor da data completa do parâmetro 'dia' na URL
 
         // Consulta SQL com filtro da data completa
-        $retorno = $conexao->prepare('SELECT * FROM horarioss WHERE dt = ?');
+        $retorno = $conexao->prepare('SELECT * FROM horarios WHERE dt = ?');
         $retorno->bindParam(1, $dataCompleta, PDO::PARAM_STR);
         $retorno->execute();
         ?>

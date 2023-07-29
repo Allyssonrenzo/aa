@@ -90,12 +90,12 @@
 <body>
 
 <?php
-    require_once('../conexao2.php');
+    require_once('../conexao.php');
 
    $id = $_GET['id'];
 
    ##sql para selecionar apens um aluno
-   $sql = "SELECT * FROM horarioss where id= :id";
+   $sql = "SELECT * FROM horarios where id= :id";
    
    # junta o sql a conexao do banco
    $retorno = $conexao->prepare($sql);

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,19 +10,10 @@
             background-color: #f2f2f2;
             font-family: Arial, sans-serif;
             color: #333333;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #0000ff;
-            color: #ffffff;
-            padding: 10px;
-            text-align: center;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 20px auto;
             padding: 20px;
             background-color: #ffffff;
@@ -78,19 +68,17 @@
     </style>
 </head>
 <body>
-     <header>
-        <h1>Lista de Horários</h1>
-    </header>
     <div class="container">
    
         <?php
         require_once('../conexao2.php');
         $aluno = 'aluno';
-        $dataCompleta = $_GET['dia']; // Recebe o valor da data completa do parâmetro 'dia' na URL
+        $dia = $_GET['dia'];
+      // Defina o valor do dia que deseja filtrar (neste caso, será 1)
 
-        // Consulta SQL com filtro da data completa
-        $retorno = $conexao->prepare('SELECT * FROM horarioss WHERE dt = ?');
-        $retorno->bindParam(1, $dataCompleta, PDO::PARAM_STR);
+        // Consulta SQL com filtro do dia
+        $retorno = $conexao->prepare('SELECT * FROM horarioss WHERE dia = ?');
+        $retorno->bindParam(1, $dia, PDO::PARAM_INT);
         $retorno->execute();
         ?>
 
@@ -98,6 +86,7 @@
             <thead>
                 <tr>
                     <th>Horario</th>
+                    <th>Dia</th>
                     <th>Data</th>
                     <th>Consulta oline ou presencial?</th>
                     <th>Nome do aluno</th>
@@ -112,6 +101,7 @@
                     <tr>
                         
                         <td><?php echo $value['horario']; ?></td>
+                        <td><?php echo $value['dia']; ?></td>
                         <td><?php echo $value['dt']; ?></td>
                         <td><?php echo $value['tipo']; ?></td>
                         <td><?php echo $value['aluno']; ?></td>

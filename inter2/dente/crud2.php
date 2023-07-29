@@ -77,14 +77,11 @@
 <body>
 <?php
 ##permite acesso as variaves dentro do aquivo conexao
-require_once('../conexao2.php');
+require_once('../conexao.php');
 
 
 
 ##cadastrar
-
-require_once('../conexao2.php');
-
 if (isset($_GET['cadastrar'])) {
     // Verificar se todos os campos foram preenchidos
     if (!empty($_GET['horario']) && !empty($_GET['dt'])) {
@@ -93,7 +90,7 @@ if (isset($_GET['cadastrar'])) {
         $dt = $_GET['dt'];
 
         // Consultar o banco de dados para verificar se já existe o mesmo horário e dia cadastrados
-        $sqlVerificaHorario = "SELECT COUNT(*) as total FROM horarioss WHERE horario = :horario AND dt = :dt";
+        $sqlVerificaHorario = "SELECT COUNT(*) as total FROM horarios WHERE horario = :horario AND dt = :dt";
         $stmtVerificaHorario = $conexao->prepare($sqlVerificaHorario);
         $stmtVerificaHorario->bindParam(':horario', $horario, PDO::PARAM_STR);
         $stmtVerificaHorario->bindParam(':dt', $dt, PDO::PARAM_STR);
@@ -104,7 +101,7 @@ if (isset($_GET['cadastrar'])) {
             echo "<p><strong>Erro:</strong> Já existe um horário cadastrado com o mesmo horário e data.</p>";
         } else {
             // Inserir os dados na tabela horarios
-            $sqlInserir = "INSERT INTO horarioss (horario, dt) VALUES (:horario, :dt)";
+            $sqlInserir = "INSERT INTO horarios (horario, dt) VALUES (:horario, :dt)";
             $stmtInserir = $conexao->prepare($sqlInserir);
             $stmtInserir->bindParam(':horario', $horario, PDO::PARAM_STR);
             $stmtInserir->bindParam(':dt', $dt, PDO::PARAM_STR);
@@ -118,7 +115,6 @@ if (isset($_GET['cadastrar'])) {
         echo "<p><strong>Erro:</strong> Preencha todos os campos do formulário.</p>";
     }
 }
-
   
 #######alterar
 if(isset($_GET['update'])){
@@ -131,7 +127,7 @@ if(isset($_GET['update'])){
     $aluno = $_GET["aluno"];
    
       ##codigo sql
-    $sql = "UPDATE  horarioss SET horario= :horario, dt= :dt, tipo= :tipo, aluno= :aluno WHERE id= :id ";
+    $sql = "UPDATE  horarios SET horario= :horario, dt= :dt, tipo= :tipo, aluno= :aluno WHERE id= :id ";
    
     ##junta o codigo sql a conexao do banco
     $stmt = $conexao->prepare($sql);

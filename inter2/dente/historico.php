@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,19 +10,10 @@
             background-color: #f2f2f2;
             font-family: Arial, sans-serif;
             color: #333333;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #0000ff;
-            color: #ffffff;
-            padding: 10px;
-            text-align: center;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 20px auto;
             padding: 20px;
             background-color: #ffffff;
@@ -78,20 +68,12 @@
     </style>
 </head>
 <body>
-     <header>
-        <h1>Lista de Horários</h1>
-    </header>
     <div class="container">
    
         <?php
-        require_once('../conexao2.php');
+        require_once('../conexao.php');
         $aluno = 'aluno';
-        $dataCompleta = $_GET['dia']; // Recebe o valor da data completa do parâmetro 'dia' na URL
-
-        // Consulta SQL com filtro da data completa
-        $retorno = $conexao->prepare('SELECT * FROM horarioss WHERE dt = ?');
-        $retorno->bindParam(1, $dataCompleta, PDO::PARAM_STR);
-        $retorno->execute();
+        
         ?>
 
         <table> 
@@ -121,7 +103,7 @@
                         <td>
                         <?php if (empty($value['aluno'])) { ?>
             <!-- Formulário (será exibido somente se a variável $aluno estiver vazia) -->
-            <form method="GET" action="marcarf.php">
+            <form method="POST" action="marcarf.php">
                 <input name="id" type="hidden" value="<?php echo $value['id']; ?>"/>
                 <button name="alterar" type="submit" class="button">Marcar</button>
             </form>
@@ -134,8 +116,13 @@
         </table> 
 
         <div class="button-container">
-        <a href="cadastrarhorarios.php " class="button">Cadastrar</a>
+        <a href="cadastrarhorarios.php " class="button">Cancelar</a>
         </div>
+
+        <div class="button-container">
+        <a href="cadastrarhorarios.php " class="button">remarcar</a>
+        </div>
+        
         
         <div class="button-container">
             <a href="calendariof.php" class="button">Voltar</a>

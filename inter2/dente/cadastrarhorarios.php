@@ -90,43 +90,43 @@
 
 </head>
 <body> 
-<?php
-require_once('../conexao2.php');
-
-if (isset($_GET['cadastrar'])) {
-    // Verificar se todos os campos foram preenchidos
-    if (!empty($_GET['horario']) && !empty($_GET['dt'])) {
-        // Receber os valores dos campos do formulário
-        $horario = $_GET['horario'];
-        $dt = $_GET['dt'];
-
-        // Consultar o banco de dados para verificar se já existe o mesmo horário e dia cadastrados
-        $sqlVerificaHorario = "SELECT COUNT(*) as total FROM horarioss WHERE horario = :horario AND dt = :dt";
-        $stmtVerificaHorario = $conexao->prepare($sqlVerificaHorario);
-        $stmtVerificaHorario->bindParam(':horario', $horario, PDO::PARAM_STR);
-        $stmtVerificaHorario->bindParam(':dt', $dt, PDO::PARAM_STR);
-        $stmtVerificaHorario->execute();
-        $totalHorarios = $stmtVerificaHorario->fetch(PDO::FETCH_ASSOC)['total'];
-
-        if ($totalHorarios > 0) {
-            echo "<p><strong>Erro:</strong> Já existe um horário cadastrado com o mesmo horário e data.</p>";
-        } else {
-            // Inserir os dados na tabela horarios
-            $sqlInserir = "INSERT INTO horarioss (horario, dt) VALUES (:horario, :dt)";
-            $stmtInserir = $conexao->prepare($sqlInserir);
-            $stmtInserir->bindParam(':horario', $horario, PDO::PARAM_STR);
-            $stmtInserir->bindParam(':dt', $dt, PDO::PARAM_STR);
-            if ($stmtInserir->execute()) {
-                echo "<p><strong>Sucesso:</strong> Horário cadastrado com sucesso!</p>";
-            } else {
-                echo "<p><strong>Erro:</strong> Não foi possível cadastrar o horário.</p>";
-            }
-        }
-    } else {
-        echo "<p><strong>Erro:</strong> Preencha todos os campos do formulário.</p>";
-    }
-}
-?>
+   <?php
+   require_once('../conexao.php');
+   
+   if (isset($_GET['cadastrar'])) {
+       // Verificar se todos os campos foram preenchidos
+       if (!empty($_GET['horario']) && !empty($_GET['dt'])) {
+           // Receber os valores dos campos do formulário
+           $horario = $_GET['horario'];
+           $dt = $_GET['dt'];
+   
+           // Consultar o banco de dados para verificar se já existe o mesmo horário e dia cadastrados
+           $sqlVerificaHorario = "SELECT COUNT(*) as total FROM horarios WHERE horario = :horario AND dt = :dt";
+           $stmtVerificaHorario = $conexao->prepare($sqlVerificaHorario);
+           $stmtVerificaHorario->bindParam(':horario', $horario, PDO::PARAM_STR);
+           $stmtVerificaHorario->bindParam(':dt', $dt, PDO::PARAM_STR);
+           $stmtVerificaHorario->execute();
+           $totalHorarios = $stmtVerificaHorario->fetch(PDO::FETCH_ASSOC)['total'];
+   
+           if ($totalHorarios > 0) {
+               echo "<p><strong>Erro:</strong> Já existe um horário cadastrado com o mesmo horário e data.</p>";
+           } else {
+               // Inserir os dados na tabela horarios
+               $sqlInserir = "INSERT INTO horarios (horario, dt) VALUES (:horario, :dt)";
+               $stmtInserir = $conexao->prepare($sqlInserir);
+               $stmtInserir->bindParam(':horario', $horario, PDO::PARAM_STR);
+               $stmtInserir->bindParam(':dt', $dt, PDO::PARAM_STR);
+               if ($stmtInserir->execute()) {
+                   echo "<p><strong>Sucesso:</strong> Horário cadastrado com sucesso!</p>";
+               } else {
+                   echo "<p><strong>Erro:</strong> Não foi possível cadastrar o horário.</p>";
+               }
+           }
+       } else {
+           echo "<p><strong>Erro:</strong> Preencha todos os campos do formulário.</p>";
+       }
+   }
+   ?>
 
 
     
