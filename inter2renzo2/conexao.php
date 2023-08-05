@@ -1,0 +1,20 @@
+<?php 
+//Criar as constantes com as credencias de acesso ao banco de dados
+DEFINE('HOST', 'localhost');
+DEFINE('USUARIO', 'root');
+DEFINE('SENHA', 'Italo1@.');
+DEFINE('DBNAME', 'sac_if');
+
+//Criar a conexão com banco de dados usando o PDO e a porta do banco de dados
+//Utilizar o Try/Catch para verificar a conexão.
+try {
+
+    $conexao = new pdo('mysql:host=' . HOST . ';dbname=' .
+                                     DBNAME, USUARIO, SENHA);
+} catch (PDOException $e) {
+    echo "Erro: Conexão com banco de dados não foi realizada com sucesso.
+     Erro gerado " . $e->getMessage();
+}
+
+
+?>
